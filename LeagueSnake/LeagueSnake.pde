@@ -18,7 +18,7 @@ this.y=y;
 // ***** GAME VARIABLES *****
 // All the game variables that will be shared by the game methods are here
 //*
-Segment head = 0;     
+Segment head;     
 int foodX=0;
 int foodY=0;
 //*
@@ -26,11 +26,9 @@ int foodY=0;
 // These methods are called at the start of the game.
 //*
 void setup() {
-size(500,500){
-}
-this.head = head;
-frameRate(20){
-}
+size(500,500);
+head = new Segment(0,0);
+frameRate(20);
 dropFood();
 }
 void dropFood() {
@@ -44,16 +42,19 @@ void dropFood() {
 void draw() {
   background(51);
 drawFood();
+move();
 drawSnake();
 }
 void drawFood() {
   //Draw the food
- size(10,10);
- color(
+  fill(0,255,0);
+ square(foodX,foodY,10);
 }
 
 void drawSnake() {
   //Draw the head of the snake followed by its tail
+  fill(255,0,0);
+  square(head.x,head.y, 10);
 }
 
 
@@ -84,7 +85,8 @@ void checkTailCollision() {
 // ***** CONTROL METHODS *****
 // These methods are used to change what is happening to the snake
 //*
-
+int direction = UP;
+int foodEaten = 0;
 void keyPressed() {
   //Set the direction of the snake according to the arrow keys pressed
   
@@ -93,22 +95,21 @@ void keyPressed() {
 void move() {
   //Change the location of the Snake head based on the direction it is moving.
   
-    /*
   switch(direction) {
   case UP:
-    // move head up here 
+    head.x += 10;
     break;
   case DOWN:
-    // move head down here 
+    head.x -=10;
     break;
   case LEFT:
-   // figure it out 
+   head.y -= 10;
     break;
   case RIGHT:
-    // mystery code goes here 
+    head.y += 10;
     break;
   }
-  */
+checkBoundaries();
 }
 
 void checkBoundaries() {
