@@ -69,9 +69,10 @@ void drawSnake() {
 
 void drawTail() {
   //Draw each segment of the tail
-  square(0,0,10);
+  for(Segment s : segments){
+    square(s.x,s.y,10);
 }
-
+}
 void manageTail() {
   //After drawing the tail, add a new segment at the "start" of the tail and remove the one at the "end" 
   //This produces the illusion of the snake tail moving.
